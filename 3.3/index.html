@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng quản lý sản phẩm</title>
+    <style> 
+        body { 
+        font-family: Arial, sans-serif; 
+        margin: 20px; 
+        background-color: #f9f9f9; 
+        } 
+        h1 { 
+            color: #333; 
+            font-size: 24px; 
+            margin-bottom: 10px; 
+        } 
+        form, .content { 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 5px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 20px; 
+        } 
+        label { 
+            font-size: 16px; 
+            margin-right: 10px; 
+        } 
+        input[type="text"] { 
+            padding: 8px; 
+            font-size: 14px; 
+            border: 1px solid #ddd; 
+            border-radius: 3px; 
+            margin-right: 10px; 
+        } 
+        button { 
+            padding: 8px 12px; 
+            font-size: 14px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 3px; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background-color: #45a049; 
+        }
+        #productList { 
+            list-style-type: none; 
+            padding: 0; 
+        } 
+        #productList li { 
+            padding: 10px; 
+            background-color: #f4f4f4; 
+            border: 1px solid #ddd; 
+            margin-bottom: 5px; 
+            border-radius: 3px; 
+        } 
+        .actions button { 
+            background-color: #007BFF; 
+            margin-left: 5px; 
+        } 
+        .actions button:hover { 
+            background-color: #0056b3; 
+        }
+        .actions button.delete { 
+            background-color: #f44336; 
+        } 
+        .actions button.delete:hover { 
+            background-color: #da190b; 
+        } 
+        #productCount { 
+            font-size: 16px; 
+            margin-top: 10px; 
+        } 
+        </style>
+</head>
+<body>
+    <h1>Thêm sản phẩm mới</h1>
+    <form id="productForm" onsubmit="addProduct(event)">
+        <label for="hang">  </label>
+        <input type="text" id="hang" name="hang">
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h1>Danh sách sản phẩm</h1>
+    <p id="productCount">Số lượng sản phẩm: 0</p>
+    <ul id="productList"></ul>
+
+    <script>
+        //  mảng chứa danh sách sản phẩm
+        const danhSachSanPham = [];
+
+        // Hàm thêm sản phẩm vào danh sách
+        function addProduct(event) {
+            event.preventDefault(); 
+
+            // Lấy giá trị từ ô nhập liệu
+            const tenSanPham = document.getElementById('hang').value.trim();
+
+            // Kiểm tra xem tên sản phẩm 
+            if (tenSanPham) {
+                // Thêm sản phẩm 
+                danhSachSanPham.push(tenSanPham);
+
+                // Hiển thị danh sách sản phẩm
+                displayProducts();
+
+                // Xóa giá trị trong ô nhập liệu sau khi thêm
+                document.getElementById('hang').value = '';
+            } else {
+                alert("Vui lòng nhập tên sản phẩm.");
+            }
+        }
+
+        // Hàm hiển thị danh sách sản phẩm
+        function displayProducts() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = ''; // Xóa danh sách cũ
+
+            // Duyệt qua mảng danh sách sản phẩm và tạo các mục danh sách
+            danhSachSanPham.forEach((product, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${product}
+                    <span class="actions">
+                        <button onclick="editProduct(${index})">Sửa</button>
+                        <button class="delete" onclick="deleteProduct(${index})">Xoá</button>
+                    </span>`;
+                productList.appendChild(li);
+            });
+
+            // Hiển thị số lượng sản phẩm
+            document.getElementById('productCount').textContent = `Số lượng sản phẩm: ${danhSachSanPham.length}`;
+        }
+
+        // Hàm sửa sản phẩm
+        function editProduct(index) {
+            const newProductName = prompt("Nhập tên sản phẩm mới:", danhSachSanPham[index]);
+            if (newProductName) {
+                danhSachSanPham[index] = newProductName.trim();
+                displayProducts();
+            }
+        }
+
+        // Hàm xoá sản phẩm
+        function deleteProduct(index) {
+            danhSachSanPham.splice(index, 1);
+            displayProducts();
+        }
+    </script>
+</body>
+</html>

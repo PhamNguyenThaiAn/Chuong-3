@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giá hoa quả</title>
+</head>
+<body>
+    <h1>Giá hoa quả</h1>
+    <label for="hq"></label>
+    <input type="text" id="hq" name="hq"><br><br>
+    <button onclick="xemgia()">Xem giá</button>
+    <h2 id="result"></h2>
+
+    <script>
+        function xemgia() {
+            // Lấy giá trị từ ô nhập liệu và chuyển thành chữ thường
+            const hq = document.getElementById('hq').value.trim().toLowerCase();
+            let gia;
+
+            // Danh sách các loại hoa quả và giá tương ứng, tên hoa quả ở dạng chữ thường
+            const tien = {
+                'ổi': 20000,
+                'dưa hấu': 20000,
+                'táo': 30000,
+                'cam': 40000,
+                'chôm chôm': 40000,
+                'măng cụt': 50000,
+            };
+
+            // Sử dụng switch case để kiểm tra giá hoa quả
+            switch (hq) {
+                case 'ổi':
+                    gia = tien['ổi'];
+                    break;
+                case 'dưa hấu':
+                    gia = tien['dưa hấu'];
+                    break;
+                case 'táo':
+                    gia = tien['táo'];
+                    break;
+                case 'cam':
+                    gia = tien['cam'];
+                    break;
+                case 'chôm chôm':
+                    gia = tien['chôm chôm'];
+                    break;
+                case 'măng cụt':
+                    gia = tien['măng cụt'];
+                    break;
+                default:
+                    gia = 'Tìm không thấy';
+            }
+
+            // Hiển thị kết quả
+            const resultElement = document.getElementById('result');
+            if (typeof gia === 'number') {
+                resultElement.textContent = `Giá ${hq} là: ${gia} VNĐ/kg`;
+            } else {
+                resultElement.textContent = gia;
+            }
+        }
+    </script>
+</body>
+</html>

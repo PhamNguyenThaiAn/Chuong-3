@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính lãi suất đơn</title>
+</head>
+<body>
+    <h1>Tính lãi suất ngân hàng</h1>
+    <label for="stv">Số tiền vay(VND):</label>
+    <input type="number" id="stv" name="stv">
+    <br> 
+    <br>
+    <label for="ls">Lãi suất (%):</label>
+    <input type="number" id="ls" name="ls">
+    <br>
+    <br>
+    <label for="sn">Số năm:</label>
+    <input type="number" id="sn" name="sn">
+    <br>
+    <br>
+    <button onclick="tinhlai()">Tính lãi</button>
+    <h2 id="result"></h2>
+    <script>
+         function tinhlai(){
+        // lấy giá trị
+        let stv = parseFloat(document.getElementById('stv').value);
+        let ls = parseFloat(document.getElementById('ls').value);
+        let sn =parseFloat(document.getElementById('sn').value);
+        // Tính lãi suất đơn
+        let lsd = stv ( stv * (ls / 100) * sn);
+        //Xuất kết quả
+        document.getElementById('result').innerText = 'Sau' + sn + 'năm,' + 'số tiền cả gốc lẫn lãi là:' + lsd.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+        }
+       
+    </script>
+</body>
+</html>

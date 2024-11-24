@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html lang="vi"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi năm dương lịch sang năm âm lịch</title> 
+</head>
+<body>
+    <h1>Chuyển đổi năm dương lịch sang năm âm lịch</h1>
+    <label for="ndl">Nhập năm dương lịch:</label>
+    <input type="number" id="ndl" name="ndl">
+    <br>
+    <br>
+    <button onclick="tinhnamamlich()">Chuyển đổi</button>
+
+    <h2 id="result"></h2>
+    <script>
+        function tinhnamamlich(){
+            let ndl = parseInt(document.getElementById('ndl').value);
+
+            let can = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"]; 
+            let chi = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"];
+
+            let tinhCan = (ndl + 6) % 10; 
+            let tinhChi = (ndl + 8) % 12; 
+            let NamAmLich = can[tinhCan] + " " + chi[tinhChi];
+
+            document.getElementById('result').innerText = 'Năm âm lịch ' + NamAmLich;
+        }
+    </script>
+</body>
+</html>

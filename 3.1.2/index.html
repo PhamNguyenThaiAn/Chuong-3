@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Kiểm tra năm nhuận</title> 
+</head>
+<body>
+    <h1>Kiểm tra năm nhuận</h1>
+    <label for="nam">Nhập năm:</label>
+    <input type="number" id="nam" name="nam">
+    <button onclick="tinhnamnhuan()">Tính năm</button>
+    <script>
+        function tinhnamnhuan(){
+            let nam=parseInt(document.getElementById('nam').value);
+            let namnhuan = false;
+        if(nam % 400 == 0){
+            namnhuan = true;
+        } else if(nam % 4 == 0 && nam % 100 != 0) {
+            namnhuan = true;
+        }
+        if(namnhuan){
+            alert(nam+":năm nhuận");
+        } else{
+            alert(nam+":năm không nhuận");
+        }
+        }
+    </script>
+</body>
